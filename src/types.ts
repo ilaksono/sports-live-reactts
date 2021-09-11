@@ -6,5 +6,5 @@
 
 
 export interface Props {
-  props: string;
+  [key:string]: any;
 }
