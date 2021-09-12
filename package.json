@@ -1,7 +1,6 @@
 {
   "name": "sports-live",
   "version": "0.1.0",
-  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
@@ -52,6 +51,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.20",
+    "prop-types": "^15.7.2",
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0"
   }

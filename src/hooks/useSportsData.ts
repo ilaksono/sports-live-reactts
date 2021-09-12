@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import ax from 'ax';
 
 
 type GenericObject = {
@@ -10,37 +10,64 @@ type SportsDataType = {
   [key: string]: GenericObject[];
 }
 
-// type SportsDataCustom {
-//   sportsData: SportsDataType,
-//   setSportsData: () => {};
-// }
-
-
-
 const useSportsData = () => {
 
-  const [sportsData, setSportsData] = useState({});
-  useEffect(() => {
-    const fetchEspnData = async () => {
-      try {
-        // const res = await axios.get('https://espn.com/sports');
-        const res = await axios.get('http://localhost:8080/', {
-          proxy: {
-            host: 'localhost',
-            port: 8080,
-        }
-        });
-        console.log(res.data);
-      }catch(er) {
-        console.error(er)
+  const [sportsData, setSportsData] = useState({
+    scores: {
+      nba: {
+        2021: {}
       }
     }
+  });
+  const fetchEspnData = async (
+    pageNum = 1,
+    resourceType = 'scores',
+    sportType = 'nba',
+    season = '2021',
+  ) => {
+    try {
+      // const res = await axios.get('https://espn.com/sports');
+
+      const res = await ax('http://localhost:8080/', {
+        pageNum,
+        resourceType,
+        sportType,
+        season,
+        proxy: {
+          host: 'localhost',
+          port: 8080,
+        }
+      });
+      if (res)
+        setPageResourceData(res, resourceType, sportType, season, pageNum);
+    } catch (er) {
+      console.error(er)
+    }
+  }
+  const setPageResourceData = (res: any, resourceType: string, sportType: string, season: string, pageNum: number) => {
+    setSportsData((prev: any) => ({
+      ...prev,
+      [resourceType]: {
+        ...prev[resourceType],
+        [sportType]: {
+          ...prev[resourceType][sportType],
+          [season]: {
+            ...prev[resourceType][sportType][season],
+            [pageNum]: res.list,
+            count: res.count
+          }
+        }
+      }
+    }))
+  }
+
+  useEffect(() => {
     fetchEspnData();
   }, [])
-
   return {
     sportsData,
-    setSportsData
+    setSportsData,
+    fetchEspnData
   }
 }
 export default useSportsData;
