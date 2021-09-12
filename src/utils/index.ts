@@ -15,3 +15,13 @@ export const formatEventDate = (d: string) => {
 
   return `${mons[da.getMonth()]} ${day} at ${hr}:${min}`;
 }
+
+export const snakeToTitle = (str = '') => {
+  let stg = str[0].toUpperCase();
+  for(let i = 1 ; i < str.length; i ++) {
+    if(str[i + 1] === '_')
+      stg += str[i].toUpperCase();
+    else stg += str[i];  
+  }
+  return stg;
+}

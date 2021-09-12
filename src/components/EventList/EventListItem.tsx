@@ -49,7 +49,9 @@ const EventListItem = (props: any) => {
     StadiumID = 8,
     Channel = 'TNT',
     HomeTeam = 'ABC',
-    AwayTeam = 'DEF'
+    AwayTeam = 'DEF',
+    HomeTeamScore = '',
+    AwayTeamScore = '',
   } = props;
 
   const classes = useStyles();
@@ -69,6 +71,10 @@ const EventListItem = (props: any) => {
         title={HomeTeam + ' | ' + AwayTeam}
         subheader={df.formatEventDate(DateTime)}
       />
+      <CardHeader 
+      subheader={`${HomeTeamScore} - ${AwayTeamScore}`}
+      />
+
 
     </Card>
   )

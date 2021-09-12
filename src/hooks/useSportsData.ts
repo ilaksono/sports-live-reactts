@@ -10,33 +10,34 @@ type SportsDataType = {
   [key: string]: GenericObject[];
 }
 
-const useSportsData = () => {
+const useSportsData = (init: any) => {
+  console.log(init);
 
   const [sportsData, setSportsData] = useState({
-    scores: {
+    Games: {
       nba: {
         2021: {}
       }
+    },
+    GamesByDate: {
+      nba: {
+        '2021-SEP-01': {}
+      }
     }
   });
-  const fetchEspnData = async (
-    pageNum = 1,
-    resourceType = 'scores',
-    sportType = 'nba',
-    season = '2021',
-  ) => {
+  const fetchEspnData = async ({
+    resourceType = init.resourceType,
+    sportType= init.sportType,
+    season= init.season,
+  }, pageNum = 1,) => {
+    // if(!resourceType)
+    //  return null;
     try {
-      // const res = await axios.get('https://espn.com/sports');
-
       const res = await ax('http://localhost:8080/', {
         pageNum,
         resourceType,
         sportType,
         season,
-        proxy: {
-          host: 'localhost',
-          port: 8080,
-        }
       });
       if (res)
         setPageResourceData(res, resourceType, sportType, season, pageNum);
@@ -44,7 +45,7 @@ const useSportsData = () => {
       console.error(er)
     }
   }
-  const setPageResourceData = (res: any, resourceType: string, sportType: string, season: string, pageNum: number) => {
+  const setPageResourceData = (res: any, resourceType: string | number, sportType: string, season: string, pageNum: number) => {
     setSportsData((prev: any) => ({
       ...prev,
       [resourceType]: {
@@ -62,7 +63,7 @@ const useSportsData = () => {
   }
 
   useEffect(() => {
-    fetchEspnData();
+    fetchEspnData({});
   }, [])
   return {
     sportsData,
