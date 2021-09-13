@@ -1,6 +1,6 @@
 
-import React, { useContext } from 'react';
-import { Container, Button } from '@material-ui/core';
+import React, { useContext, useState } from 'react';
+import { CircularProgress, Container, Button } from '@material-ui/core';
 
 import EventListItem from './EventListItem';
 import AppContext from 'context/AppContext.js';
@@ -42,23 +42,27 @@ const EventList: React.FC = (props: any) => {
         display: 'flex'
       }}>
         <Button
-        onClick={() => {
-          changeQueryParam('resourceType', 'Games')
-          changeQueryParam('season', 2021);
-        }
-      }
+          onClick={() => {
+            changeQueryParam('resourceType', 'Games')
+            changeQueryParam('season', '2021');
+          }
+          }
         >Games</Button>
         <Button
-        onClick={() => {
-          changeQueryParam('resourceType', 'GamesByDate')
-          changeQueryParam('season', '2020-SEP-15');
+          onClick={() => {
+            changeQueryParam('resourceType', 'GamesByDate')
+            changeQueryParam('season', '2020-SEP-15');
 
-        }
-      
-      }
+          }
+
+          }
         >Games By Date</Button>
 
       </div>
+      {
+        sportsData.loading &&
+        <CircularProgress />
+      }
 
       <Container
         style={{

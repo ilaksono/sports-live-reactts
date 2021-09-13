@@ -64,7 +64,7 @@ const EventListItem = (props: any) => {
       >
         <CardContent
         >
-          {Channel}
+          {Channel || 'N/A'}
         </CardContent>
       </Card>
       <CardHeader
@@ -72,7 +72,7 @@ const EventListItem = (props: any) => {
         subheader={df.formatEventDate(DateTime)}
       />
       <CardHeader 
-      subheader={`${HomeTeamScore} - ${AwayTeamScore}`}
+      subheader={HomeTeamScore && `${HomeTeamScore} - ${AwayTeamScore}`}
       />
 
 

@@ -10,8 +10,7 @@ type SportsDataType = {
   [key: string]: GenericObject[];
 }
 
-const useSportsData = (init: any) => {
-  console.log(init);
+const useSportsData = (init: any, createError: (arg: string) => void) => {
 
   const [sportsData, setSportsData] = useState({
     Games: {
@@ -23,8 +22,10 @@ const useSportsData = (init: any) => {
       nba: {
         '2021-SEP-01': {}
       }
-    }
+    },
+    loading: false
   });
+
   const fetchEspnData = async ({
     resourceType = init.resourceType,
     sportType= init.sportType,
@@ -33,6 +34,7 @@ const useSportsData = (init: any) => {
     // if(!resourceType)
     //  return null;
     try {
+      setLoadingSports(true);
       const res = await ax('http://localhost:8080/', {
         pageNum,
         resourceType,
@@ -42,8 +44,13 @@ const useSportsData = (init: any) => {
       if (res)
         setPageResourceData(res, resourceType, sportType, season, pageNum);
     } catch (er) {
+      resourceType && createError('No data found');
       console.error(er)
     }
+    setLoadingSports(false);
+  }
+  const setLoadingSports = (loading: boolean) => {
+    setSportsData(prev => ({...prev, loading}))
   }
   const setPageResourceData = (res: any, resourceType: string | number, sportType: string, season: string, pageNum: number) => {
     setSportsData((prev: any) => ({

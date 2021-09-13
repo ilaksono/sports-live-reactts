@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useSportsData from 'hooks/useSportsData';
 import usePagination from 'hooks/usePagination';
 import useQueryData from 'hooks/useQueryData';
+import useErrorModal from 'hooks/useErrorModal';
 const AppContext = React.createContext();
 
 const initQueryData = {
@@ -13,9 +14,14 @@ const initQueryData = {
 export function AppProvider({ children }) {
 
   const {
+    error,
+    createError,
+    handleResetError
+  } = useErrorModal();
+  const {
     sportsData,
     fetchEspnData
-  } = useSportsData(initQueryData);
+  } = useSportsData(initQueryData, createError);
   const {
     queryData,
     changeQueryParam
@@ -27,17 +33,27 @@ export function AppProvider({ children }) {
     setPage
   } = usePagination();
   useEffect(() => {
-    fetchEspnData(queryData, page)
+    fetchEspnData(queryData, page + 1)
   }, [queryData])
 
   return (
     <AppContext.Provider value={{
+      
+      //useSportsData
+      
       sportsData,
       fetchEspnData,
+      //usePagination
       page,
       setPage,
+
+      //useQueryData
       queryData,
-      changeQueryParam
+      changeQueryParam,
+      // useErrorModal
+      error,
+      createError,
+      handleResetError
     }}>
       {children}
     </AppContext.Provider>

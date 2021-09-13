@@ -90,6 +90,9 @@ app.post('/', async (req: any, rex: any) => {
       return errorResponse(rex, er);
     }
   }
+  if(!data.length)
+  return errorResponse(rex, 'No Data found');
+
   return done(
     {
       list: data,
