@@ -39,24 +39,10 @@ const EventList: React.FC = (props: any) => {
     <>
       <EventTitle />
       <div style={{
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'center'
       }}>
-        <Button
-          onClick={() => {
-            changeQueryParam('resourceType', 'Games')
-            changeQueryParam('season', '2021');
-          }
-          }
-        >Games</Button>
-        <Button
-          onClick={() => {
-            changeQueryParam('resourceType', 'GamesByDate')
-            changeQueryParam('season', '2020-SEP-15');
-
-          }
-
-          }
-        >Games By Date</Button>
+        
 
       </div>
       {
