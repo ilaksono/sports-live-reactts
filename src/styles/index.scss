@@ -7,12 +7,12 @@
   // background-color: rgb(250, 250, 250);
   color: rgb(39, 39, 39);
   border-bottom: 1px solid black;
-
+  margin-bottom: 16px;
   opacity: 0.99;
-  padding-left: 100px;
-  padding-right: 160px;
+  padding-left: 60px;
+  padding-right: 60px;
   z-index: 99;
-  width: 100vw;
+  // width: 100vw;
   overflow-x: auto;
   .dropdown-menu {
     // max-height: 176px;
@@ -29,4 +29,14 @@
 .event-list {
   max-height: 70vh;
   overflow-y: auto;
+}
+
+.react-calendar {
+  max-width: 95vw;
+}
+.transition-height {
+  max-height: fit-content;
+  // max-height:999px
+  overflow-y: auto;
+  transition: max-height 2s;
 }

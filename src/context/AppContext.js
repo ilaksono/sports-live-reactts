@@ -12,6 +12,11 @@ const initQueryData = {
 }
 
 export function AppProvider({ children }) {
+  const {
+    page,
+    setPage,
+    resetPage,
+  } = usePagination();
 
   const {
     error,
@@ -25,15 +30,11 @@ export function AppProvider({ children }) {
   const {
     queryData,
     changeQueryParam
-  } = useQueryData(initQueryData);
+  } = useQueryData(initQueryData, resetPage);
 
 
-  const {
-    page,
-    setPage
-  } = usePagination();
   useEffect(() => {
-    fetchEspnData(queryData, page + 1)
+    fetchEspnData(queryData, page)
   }, [queryData])
 
   return (

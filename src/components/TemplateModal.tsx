@@ -24,6 +24,11 @@ const TemplateModal = (props: any) => {
     <Modal
       open={open}
       onClose={handleClose}
+      style={{
+        position: 'absolute',
+        top: 20,
+        // left: '30%'
+      }}
     >
       <div className={classes.paper}>
         <h2 id="simple-modal-title">Notice</h2>

@@ -8,7 +8,7 @@ export default async (url: string, payload: any) => {
   try {
     const res = await axios.post(url, payload);
     if (invalidRequest(res.data))
-      throw new Error();
+      throw new Error('My Axios Wrapper: Handled Error');
     return res.data.data;  
   } catch (er: any) {
     console.error(er);

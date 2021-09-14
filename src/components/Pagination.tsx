@@ -1,5 +1,6 @@
 import React from 'react';
-import TablePagination from '@material-ui/core/TablePagination';
+// import {TablePagination } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
 import {Container} from '@material-ui/core';
 const TablePaginationDemo = (props: any) => {
 
@@ -26,15 +27,15 @@ const TablePaginationDemo = (props: any) => {
   return (
     <Container>
 
-      <TablePagination
-        component="div"
-        count={count || 100}
+      <Pagination
+        // component="div"
+        count={Math.floor(count / 10)  || 1}
         page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        // showFirstButton={true}
-        // showLastButton={true}
+        onChange={handleChangePage}
+        // rowsPerPage={rowsPerPage}
+        // onRowsPerPageChange={handleChangeRowsPerPage}
+        showFirstButton={true}
+        showLastButton={true}
       />
     </Container>
   );

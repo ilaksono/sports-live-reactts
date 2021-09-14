@@ -27,9 +27,9 @@ const EventList: React.FC = (props: any) => {
     fetchEspnData(queryData, pageNum + 1);
   }
 
-  if (!sportsData[resourceType][sportType][season])
-    return null;
-  const parsedList = sportsData[resourceType][sportType][season] && sportsData[resourceType][sportType][season][page + 1]?.map((each: any) =>
+  // if (!sportsData[resourceType][sportType][season])
+  //   return null;
+  const parsedList = sportsData[resourceType][sportType][season] && sportsData[resourceType][sportType][season][page]?.map((each: any) =>
     <EventListItem
       key={each.GameID}
       {...each}
@@ -53,7 +53,7 @@ const EventList: React.FC = (props: any) => {
       <Container
         style={{
           backgroundColor: '#eee',
-          padding: 24,
+          padding: 10,
           display: 'grid',
           gridTemplateColumns: `repeat(${window.innerWidth < 640 ? 1 : 2}, 1fr)`,
           alignItems: 'center',
@@ -66,7 +66,7 @@ const EventList: React.FC = (props: any) => {
           page={page}
           setPage={setPage}
           pageCallback={pageCallback}
-          count={sportsData[resourceType][sportType][season][page + 1]?.count}
+          count={sportsData[resourceType][sportType] && sportsData[resourceType][sportType][season]?.count}
         />
       </Container>
     </>

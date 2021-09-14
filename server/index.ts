@@ -64,7 +64,7 @@ const fetchSportsApi = async (resourceType: string, sportType: string, season: s
       memo[resourceType][sportType][season] = res.data;
 
   } catch (er) {
-    throw new Error();
+    throw new Error('Fetch Sports Api: Handled Error');
   }
   console.log(memo[resourceType][sportType][season])
 
